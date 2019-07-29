@@ -1,8 +1,25 @@
 
+
+/* 480 960 */
+
 main{background-color: #FFFFFF}
 
+#logo{
+	
+	
+	max-height: 85px;
+	max-width: 20%;
+	padding-left: 1em;
+	
+}
 
-@media screen and (max-width: 10000000px) {
+@media screen and (max-width: 480px) {
+	#logo{
+		display: none;
+	}
+}	
+
+@media screen and (min-width:480px) and (max-width: 800px) {
 	body {
 		font-family: 'Montserrat', sans-serif;
 
@@ -14,17 +31,8 @@ main{background-color: #FFFFFF}
 		background-color: #FFFFFF;
 		border-bottom: 2px solid #02b3e4;
 		min-height: 10%;
+		max-height: 200px;
 	}
-
-		#logo{
-			max-width: 15%;
-			order: -99;
-			padding-left: 1em;
-			padding-bottom: 1em;
-		}
-		
-
-		
 		.top-right-text{
 			color: #02b3e4;
 			position: absolute;
@@ -33,7 +41,7 @@ main{background-color: #FFFFFF}
 			margin: 1px;
 			padding: 0px;
 			text-align: right;
-			height: 50%
+			
 
 
 
@@ -59,63 +67,66 @@ main{background-color: #FFFFFF}
 	nav {
 		width: 100%;
 		border-bottom: 2px solid #02b3e4;
-	}
+		}
 
-	.navigation {
-		display: flex;
-		flex-wrap: wrap-reverse;
-		justify-content: space-around;
-	}
+		.navigation {
+			display: flex;
+			flex-wrap: wrap-reverse;
+			justify-content: space-around;
+		}
 
-	.navigation a{
-		flex-grow: 1;
-		font-size: 18px;
-		padding: 1em;
-		text-align: center;
-		background-color: #FFFFFF;
-	
-		text-decoration: none;
-		color: #2d3c49;
-
-
-	}
-
-	.navigation a:hover {
-  		cursor: pointer;
-	}
-
-	#focal-title {
-		text-align: center;
-		position: relative;
-		top: 5%;
+		.navigation a{
+			flex-grow: 1;
+			font-size: 18px;
+			padding: 1em;
+			text-align: center;
+			background-color: #FFFFFF;
 		
-		font-size: 18px;
+			text-decoration: none;
+			color: #2d3c49;
+
+
+		}
+
+		.navigation a:hover {
+			cursor: pointer;
+		}
+/* 
+	#focal-title {
+		
+		text-align: center;
+		font-size: 28px;
 		padding: 1em;
+
+	} */
+
+	hero-image a {
+		display: inline-block;
+		align-content: center;
+		text-align: center;
 	}
 
 	hero-image img {
-		width: 100%
+		width: 100%;
+		max-width: 960px;
+		margin-top: 1em;
 
 	}
 
 	.sk-container {
 		display: flex;
-		flex-wrap: wrap;
+		
 
 	}
 
 	.sidekick img{
+		max-width: 100%;
 	}
 
-	.bridge {
-		flex-grow: 50%;
+	footer {
+		text-align: center;
+		border-top: 2px solid #02b3e4;
+		margin-top: 20px;
 	}
 
-
-/*Learning donor code*/
-
-
-
-		
-
-
+}
