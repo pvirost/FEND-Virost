@@ -10,6 +10,14 @@
  *   - add each card's HTML to the page
  */
 
+
+ /*
+ My attempt at a listener to shuffle the tiles
+const restart = document.querySelector('.restart');
+restart.addEventListener('click', shuffle (array));
+*/
+
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -36,3 +44,18 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
+const allCards = document.getElementsByClassName("card");
+
+
+for (let card of allCards) {
+    card.addEventListener('click' , function(){
+        console.log('A card was clicked.')
+        console.log(card)
+    })} true;
+
+
+document.addEventListener('click', function () {
+    console.log('The thing was clicked!');
+    });
