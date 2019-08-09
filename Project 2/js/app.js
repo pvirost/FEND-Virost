@@ -47,14 +47,24 @@ function shuffle(array) {
 
 
 const allCards = document.getElementsByClassName("card");
+const openCards = [];
 
 
 for (let card of allCards) {
-    card.addEventListener('click' , function(){
-        card.classList.add('open', 'show')
+    card.addEventListener('click' , function(e){
+        openCards.push(card)
+        if (openCards.length >= 2) {
+            console.log(openCards.length)
+        }
+        })};
+
+        // console.log(openCards)};
+        // card.classList.add('open', 'show')
+        // if (card.querySelector
+    // )};
         // console.log("A card was clicked.")
         // console.log(card)
-    })};
+    // )};
 
 
 // document.addEventListener('click', function () {
