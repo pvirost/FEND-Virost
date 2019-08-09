@@ -51,11 +51,12 @@ const allCards = document.getElementsByClassName("card");
 
 for (let card of allCards) {
     card.addEventListener('click' , function(){
-        console.log('A card was clicked.')
-        console.log(card)
-    })} true;
+        card.classList.add('open', 'show')
+        // console.log("A card was clicked.")
+        // console.log(card)
+    })};
 
 
-document.addEventListener('click', function () {
-    console.log('The thing was clicked!');
-    });
+// document.addEventListener('click', function () {
+//     console.log('The thing was clicked!');
+//     });
