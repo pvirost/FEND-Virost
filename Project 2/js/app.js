@@ -46,20 +46,33 @@ function shuffle(array) {
  */
 
 
-const allCards = document.getElementsByClassName("card");
-const openCards = [];
+const allCards = document.querySelectorAll(".card");
+let openCards = [];
 
 
 for (let card of allCards) {
-    card.addEventListener('click' , function(e){
+    card.addEventListener('click', function(e) {
         openCards.push(card)
+        card.classList.add('open', 'show')
+
         if (openCards.length >= 2) {
+            setTimeout( function(){
+                openCards.forEach(function(card){
+                card.classList.remove('open', 'show')          
+                console.log(openCards.length)
+                openCards = [];
+                })
+            }, 1000)
+
+        } else {
+            
             console.log(openCards.length)
         }
-        })};
+    })
+};
 
         // console.log(openCards)};
-        // card.classList.add('open', 'show')
+        // 
         // if (card.querySelector
     // )};
         // console.log("A card was clicked.")
