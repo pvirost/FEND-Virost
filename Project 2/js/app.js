@@ -24,7 +24,7 @@ function generateCard(card) {
 
 
 
-//  My attempt at a listener to shuffle the tiles
+//  My attempt at a listener to restart the game
 const restart = document.querySelector('.restart');
 restart.addEventListener('click', function(e){
     return initGame();
