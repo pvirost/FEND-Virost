@@ -83,16 +83,9 @@ for (let card of allCards) {
             if (openCards.length == 2) {
 
                 if (openCards[0].dataset.card == openCards[1].dataset.card){
-                    console.log(openCards[0])
-                    console.log(openCards[1])
-                    openCards[0].card.classlist.add('match');
-                    // openCards[0].classlist.add('show');
-                    // openCards[0].classlist.add('open');
-                    // openCards[1].classlist.add('match');
-                    // card.classList.add('match')
-
-                    console.log("It's a Match!")
-                    // openCards = [];
+                    openCards[0].classList.add('match');
+                    openCards[1].classList.add('match');
+                    openCards = [];
                 }
 
 
