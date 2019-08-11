@@ -1,15 +1,15 @@
 /*
  * Create a list that holds all of your cards
  */
-
- const cards = ['fa-diamond', 'fa-diamond',
-            'fa-paper-plane-o', 'fa-paper-plane-o',
-            'fa-anchor', 'fa-anchor',
-            'fa-bolt', 'fa-bolt',
-            'fa-cube', 'fa-cube',
-            'fa-leaf', 'fa-leaf',
-            'fa-bomb', 'fa-bomb',
-            'fa-bicycle', 'fa-bicycle',]
+const cards = ['fa-diamond', 'fa-diamond',
+    'fa-paper-plane-o', 'fa-paper-plane-o',
+    'fa-anchor', 'fa-anchor',
+    'fa-bolt', 'fa-bolt',
+    'fa-cube', 'fa-cube',
+    'fa-leaf', 'fa-leaf',
+    'fa-bomb', 'fa-bomb',
+    'fa-bicycle', 'fa-bicycle',
+]
 
 function generateCard(card) {
     return cardTemplate = `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`
@@ -26,13 +26,16 @@ function generateCard(card) {
 
 //  My attempt at a listener to shuffle the tiles
 const restart = document.querySelector('.restart');
-restart.addEventListener('click', shuffle(cards));
+restart.addEventListener('click', function(e){
+    return initGame();
+});
 
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -47,7 +50,7 @@ function shuffle(array) {
 
 function initGame() {
     const deck = document.querySelector('.deck');
-    const cardHTML = shuffle(cards).map(function(card){
+    const cardHTML = shuffle(cards).map(function(card) {
         return generateCard(card);
     });
 
@@ -65,7 +68,7 @@ function initGame() {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
- initGame();
+initGame();
 
 const allCards = document.querySelectorAll(".card");
 let openCards = [];
@@ -78,11 +81,11 @@ for (let card of allCards) {
             openCards.push(card)
             card.classList.add('open', 'show')
 
-          
+
 
             if (openCards.length == 2) {
 
-                if (openCards[0].dataset.card == openCards[1].dataset.card){
+                if (openCards[0].dataset.card == openCards[1].dataset.card) {
                     openCards[0].classList.add('match');
                     openCards[1].classList.add('match');
                     openCards = [];
@@ -102,19 +105,19 @@ for (let card of allCards) {
                 console.log(openCards.length)
             }
         } else {
-        console.log('already flipped');
+            console.log('already flipped');
         }
     })
 };
 
 
-        // console.log(openCards)};
-        // 
-        // if (card.querySelector
-    // )};
-        // console.log("A card was clicked.")
-        // console.log(card)
-    // )};
+// console.log(openCards)};
+// 
+// if (card.querySelector
+// )};
+// console.log("A card was clicked.")
+// console.log(card)
+// )};
 
 
 // document.addEventListener('click', function () {
