@@ -27,7 +27,7 @@ function generateCard(card) {
 //  My attempt at a listener to restart the game
 const restart = document.querySelector('.restart');
 restart.addEventListener('click', function(e){
-    return initGame();
+    document.location.reload(true)
 });
 
 
@@ -72,6 +72,7 @@ initGame();
 
 const allCards = document.querySelectorAll(".card");
 let openCards = [];
+let matchedCards = [];
 
 
 
@@ -88,7 +89,14 @@ for (let card of allCards) {
                 if (openCards[0].dataset.card == openCards[1].dataset.card) {
                     openCards[0].classList.add('match');
                     openCards[1].classList.add('match');
+                    matchedCards.push(openCards[0]);
+                    matchedCards.push(openCards[1]);
                     openCards = [];
+
+                    if (matchedCards.length == 16) {
+                        setTimeout(function() {
+                            alert("You've Won!")}, 500);
+                    }
                 }
 
 
