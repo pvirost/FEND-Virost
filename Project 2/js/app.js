@@ -74,6 +74,10 @@ const allCards = document.querySelectorAll(".card");
 let openCards = [];
 let matchedCards = [];
 
+let turns = 0;
+let turnCounter = document.querySelector('.moves');
+
+
 
 
 for (let card of allCards) {
@@ -82,9 +86,12 @@ for (let card of allCards) {
             openCards.push(card)
             card.classList.add('open', 'show')
 
-
-
             if (openCards.length == 2) {
+
+                turns++
+                turnCounter.textContent = `${turns}`;
+
+                
 
                 if (openCards[0].dataset.card == openCards[1].dataset.card) {
                     openCards[0].classList.add('match');
@@ -95,7 +102,7 @@ for (let card of allCards) {
 
                     if (matchedCards.length == 16) {
                         setTimeout(function() {
-                            alert("You've Won!")}, 500);
+                            alert(`You've Won! It took you ${turns} tries!`)}, 500);
                     }
                 }
 
