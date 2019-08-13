@@ -1,6 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
+
 const cards = ['fa-diamond', 'fa-diamond',
     'fa-paper-plane-o', 'fa-paper-plane-o',
     'fa-anchor', 'fa-anchor',
@@ -47,6 +48,8 @@ function shuffle(array) {
 
     return array;
 }
+
+// import Swal from 'sweetalert2';
 
 function initGame() {
     const deck = document.querySelector('.deck');
@@ -100,9 +103,15 @@ for (let card of allCards) {
                     matchedCards.push(openCards[1]);
                     openCards = [];
 
-                    if (matchedCards.length == 16) {
+                    if (matchedCards.length == 2) {
                         setTimeout(function() {
-                            alert(`You've Won! It took you ${turns} tries!`)}, 500);
+                            Swal.fire({
+                                title: "You've Won!",
+                                text: `You've Won! It took you ${turns} tries!`,
+                                type: 'success',
+                                confirmButtonText: 'Cool'
+                              })}, 200);
+                            
                     }
                 }
 
