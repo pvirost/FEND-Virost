@@ -81,6 +81,23 @@ let turns = 0;
 let turnCounter = document.querySelector('.moves');
 
 let time = 0;
+let timerDisp = document.querySelector('.timer');
+
+
+
+document.addEventListener("mouseover", console.log('yo'));
+
+setInterval(function(){
+    if (time <60) {
+        timerDisp.textContent = `${time} Seconds`;
+    }
+
+    if (time >= 60){
+        let mins = Math.floor(time / 60);
+        let secs = (time % 60);
+        timerDisp.textContent = `${mins} Minutes and ${secs} Seconds`;
+    }
+}, 1000);
 
 timer = setInterval(function(){
     time++;
@@ -91,13 +108,6 @@ let star0 = document.querySelector('.zero')
 let star1 = document.querySelector('.one')
 
 let starCount = 3;
-
-
-if (turns > 2) {
-    alert('too many turns');
-}
-
-
 
 
 for (let card of allCards) {
@@ -130,7 +140,7 @@ for (let card of allCards) {
                     matchedCards.push(openCards[1]);
                     openCards = [];
 
-                    if (matchedCards.length == 16) {
+                    if (matchedCards.length == 2) {
                         setTimeout(function() {
                             Swal.fire({
                                 title: "You've Won!",
