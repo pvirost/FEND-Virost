@@ -80,11 +80,38 @@ let matchedCards = [];
 let turns = 0;
 let turnCounter = document.querySelector('.moves');
 
+let time = 0;
+
+timer = setInterval(function(){
+    time++;
+}, 1000);
+
+
+let star0 = document.querySelector('.zero')
+let star1 = document.querySelector('.one')
+
+let starCount = 3;
+
+
+if (turns > 2) {
+    alert('too many turns');
+}
+
 
 
 
 for (let card of allCards) {
     card.addEventListener('click', function(e) {
+        if (turns > 10) {
+            document.querySelector(".zero").style.display = "none";
+            starCount = 2;
+        }
+        if (turns > 20) {
+            document.querySelector(".one").style.display = "none";
+            starCount = 2;
+        }
+
+        
         if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
             openCards.push(card)
             card.classList.add('open', 'show')
@@ -103,13 +130,13 @@ for (let card of allCards) {
                     matchedCards.push(openCards[1]);
                     openCards = [];
 
-                    if (matchedCards.length == 2) {
+                    if (matchedCards.length == 16) {
                         setTimeout(function() {
                             Swal.fire({
                                 title: "You've Won!",
-                                text: `You've Won! It took you ${turns} tries!`,
+                                text: `You've Won! It took you ${turns} tries and ${time} seconds! You received a ${starCount} star rating. Congrats!`,
                                 type: 'success',
-                                confirmButtonText: 'Cool'
+                                confirmButtonText: 'Done'
                               })}, 200);
                             
                     }
