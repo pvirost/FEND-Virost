@@ -85,7 +85,6 @@ let timerDisp = document.querySelector('.timer');
 
 
 
-document.addEventListener("mouseover", console.log('yo'));
 
 setInterval(function(){
     if (time <60) {
@@ -99,9 +98,7 @@ setInterval(function(){
     }
 }, 1000);
 
-timer = setInterval(function(){
-    time++;
-}, 1000);
+
 
 
 let star0 = document.querySelector('.zero')
@@ -109,16 +106,22 @@ let star1 = document.querySelector('.one')
 
 let starCount = 3;
 
+document.addEventListener('click', function(t){
+    timer = setInterval(function(){
+        time++;
+        // card.removeEventListener('click',function(e) {});
+    }, 1000)}, {once: true});
 
 for (let card of allCards) {
-    card.addEventListener('click', function(e) {
+    card.addEventListener('click', function(e) {     
+
         if (turns > 10) {
             document.querySelector(".zero").style.display = "none";
             starCount = 2;
         }
         if (turns > 20) {
             document.querySelector(".one").style.display = "none";
-            starCount = 2;
+            starCount = 1;
         }
 
         
