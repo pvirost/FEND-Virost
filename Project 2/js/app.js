@@ -109,8 +109,9 @@ let starCount = 3;
 document.addEventListener('click', function(t){
     timer = setInterval(function(){
         time++;
-        // card.removeEventListener('click',function(e) {});
-    }, 1000)}, {once: true});
+    }, 1000)
+}, {once: true});
+
 
 for (let card of allCards) {
     card.addEventListener('click', function(e) {     
@@ -143,14 +144,22 @@ for (let card of allCards) {
                     matchedCards.push(openCards[1]);
                     openCards = [];
 
-                    if (matchedCards.length == 2) {
+                    if (matchedCards.length == 16) {
                         setTimeout(function() {
                             Swal.fire({
                                 title: "You've Won!",
                                 text: `You've Won! It took you ${turns} tries and ${time} seconds! You received a ${starCount} star rating. Congrats!`,
                                 type: 'success',
-                                confirmButtonText: 'Done'
-                              })}, 200);
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Click to play again!'
+                              }).then((result) => {
+                                if (result.value) {
+                                    document.location.reload(true)
+                                }
+                              })
+                              }, 200);
                             
                     }
                 }
