@@ -1,6 +1,24 @@
 body {
     text-align: center;
+    
 }
+
+#header {
+    display: flex;
+    flex-direction: row;
+    width: 505px;
+    margin: auto;
+    justify-content: space-between;
+}
+
+#score {
+    
+}
+
+#lives {
+
+}
+
 
 @keyframes shake {
     10%, 90% {
