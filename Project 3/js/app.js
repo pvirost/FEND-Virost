@@ -1,11 +1,14 @@
 // Enemies our player must avoid
-const Enemy = function() {
+const Enemy = function(x, y, v) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.x = x;
+    this.y = y;
+    this.velocity = v;
 };
 
 // Update the enemy's position, required method for game
@@ -14,6 +17,13 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x += this.velocity * dt;
+    if (this.x > 707) {
+        this.x = -100;
+        let RandVelocity = (Math.random() * 4 + 1);
+        this.velocity = RandVelocity;
+    }
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -25,10 +35,48 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
+const Player = function() {
+    this.sprite = 'Project 3\images\char-boy.png';
+    this.x = 300;
+    this.y = 400;
+    this.LR_move = 100
+    this.UD_move = 80;
+};
+
+Player.prototype.resetPosition = function() {
+    this.x = 300;
+    this.y = 400;
+};
+
+Player.prototype.handleInput = function(direction) {
+    switch (direction) {
+        case 'left':
+            this.x >= this.LR_move ? this.x -= this.LR_move : this.x -= 0;
+            break;
+        case 'right':
+            this.x <= (this.LR_move * 5) ? this.x += this.LR_move : this.x -= 0;
+            break;
+        case 'up':
+            this.y -= this.UD_move;
+            if (this.y <= 50) {
+                this.resetPosition();
+            }
+            break;
+        case 'down':
+            this.y <= (this.UD_move * 4) ? this.y += this.UD_move : this.y += 0;
+            break;
+
+    }
+}
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+
+allEnemies = [];
+
+
 
 
 
