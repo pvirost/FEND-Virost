@@ -77,7 +77,10 @@ Player.prototype.handleInput = function(direction) {
                 this.x -= 0};
             break;
         case 'right':
-            this.x <= (this.LR_move * 3) ? this.x += this.LR_move : this.x -= 0;
+            if (this.x <= (this.LR_move * 3)) {
+                this.x += this.LR_move
+             } else {
+                this.x -= 0};
             break;
         case 'up':
             this.y -= this.UD_move;
@@ -88,7 +91,19 @@ Player.prototype.handleInput = function(direction) {
                 ScoreBoard.textContent = `${Score}`;
                 if (Score === 3) {
                     setTimeout(function() {
-                        alert('You Won!')
+                        Swal.fire({
+                            title: "You've Won!",
+                            text: `You Made it Across ${Score} Times!`,
+                            type: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Click to play again!'
+                        }).then((result) => {
+                          if (result.value) {
+                              document.location.reload(true)
+                          }
+                        })
                     }, 50);
                 }
             }
@@ -128,7 +143,10 @@ document.addEventListener('keyup', function(e) {
             40: 'down'
         }
         player.handleInput(allowedKeys[e.keyCode]);
-    };
+    }
+});
+    
+        
+    
 
     // player.handleInput(allowedKeys[e.keyCode]);
-});
