@@ -20,7 +20,7 @@ Enemy.prototype.update = function(dt) {
     this.x += this.velocity * dt;
     if (this.x > 707) {
         this.x = -100;
-        let RandVelocity = (Math.random() * 4 + 1);
+        let RandVelocity = 60 * (Math.floor(Math.random() * 4 + 2));
         this.velocity = RandVelocity;
     }
 
@@ -36,7 +36,7 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 const Player = function() {
-    this.sprite = 'Project 3\images\char-boy.png';
+    this.sprite = 'images/char-boy.png';
     this.x = 300;
     this.y = 400;
     this.LR_move = 100
@@ -46,6 +46,13 @@ const Player = function() {
 Player.prototype.resetPosition = function() {
     this.x = 300;
     this.y = 400;
+};
+
+Player.prototype.update = function(dt) {
+};
+
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 Player.prototype.handleInput = function(direction) {
@@ -71,10 +78,22 @@ Player.prototype.handleInput = function(direction) {
 
 
 // Now instantiate your objects.
+
+let bug1 = new Enemy(-80, 60, 60 * (Math.floor(Math.random() * 4 + 2)));
+let bug2 = new Enemy(-80, 140, 60 * (Math.floor(Math.random() * 4 + 2)));
+let bug3 = new Enemy(-80, 220, 60 * (Math.floor(Math.random() * 4 + 2)));
+console.log(bug1);
+console.log(bug2);
+console.log(bug3);
+
+
 // Place all enemy objects in an array called allEnemies
+window.allEnemies = [bug1, bug2, bug3];
+
 // Place the player object in a variable called player
 
-allEnemies = [];
+window.player = new Player();
+
 
 
 
