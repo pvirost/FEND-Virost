@@ -1,5 +1,6 @@
 let Score = 0;
 let ScoreBoard = document.querySelector('.score')
+// let gameBoard = document.getElementById('myCanvas')
 
 // Enemies our player must avoid
 const Enemy = function(x, y, v) {
@@ -72,12 +73,22 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.die = function() {
-    setTimeout(function() {
-        this.y += 100},1000);
+    
+    let gameBoard = document.getElementById('myCanvas')
+    gameBoard.classList.add("apply-shake");
+    this.resetPosition();
+    setTimeout(function(){
+        gameBoard.classList.remove("apply-shake");
+    }, 820)
+   
+
+    
+    
+
     console.log('wiggle');
     // this.x -= 60
     // this.x += 30
-    // this.resetPosition();
+    
 }
 
 Player.prototype.handleInput = function(direction) {
