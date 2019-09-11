@@ -71,7 +71,10 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function(direction) {
     switch (direction) {
         case 'left':
-            this.x >= this.LR_move ? this.x -= this.LR_move : this.x -= 0;
+            if (this.x >= this.LR_move) {
+                this.x -= this.LR_move
+            } else {
+                this.x -= 0};
             break;
         case 'right':
             this.x <= (this.LR_move * 3) ? this.x += this.LR_move : this.x -= 0;
