@@ -1,10 +1,6 @@
 let Score = 0;
 let ScoreBoard = document.querySelector('.score')
 
-
-
-
-
 // Enemies our player must avoid
 const Enemy = function(x, y, v) {
     // Variables applied to each of our instances go here,
@@ -25,17 +21,22 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.velocity * dt;
-    if (this.x > 707) {
+    if (this.x > 507) {
         this.x = -100;
         let RandVelocity = (Math.random() + 0.3) * 60 * (Math.floor(Math.random() * 4 + 2));
         this.velocity = RandVelocity;
       
     }
 
-    let bugXL = this.x - 60;
-    let bugXR = this.x + 60;
+    let bugL = this.x - 60;
+    let bugR = this.x + 60;
     let bugT = this.y - 55;
     let bugB = this.y + 55;
+    if (player.x <= bugR && player.x >= bugL && player.y <= bugB && player.y >= bugT) {
+        player.die();
+    }
+
+    // console.log(Player);
 
 };
 
@@ -59,6 +60,8 @@ const Player = function() {
 Player.prototype.resetPosition = function() {
     this.x = 200;
     this.y = 400;
+
+    
 };
 
 Player.prototype.update = function(dt) {
@@ -67,6 +70,15 @@ Player.prototype.update = function(dt) {
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+Player.prototype.die = function() {
+    setTimeout(function() {
+        this.y += 100},1000);
+    console.log('wiggle');
+    // this.x -= 60
+    // this.x += 30
+    // this.resetPosition();
+}
 
 Player.prototype.handleInput = function(direction) {
     switch (direction) {
@@ -104,7 +116,7 @@ Player.prototype.handleInput = function(direction) {
                               document.location.reload(true)
                           }
                         })
-                    }, 50);
+                    }, 150);
                 }
             }
             break;
