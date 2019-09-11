@@ -1,3 +1,10 @@
+let Score = 0;
+let ScoreBoard = document.querySelector('.score')
+
+
+
+
+
 // Enemies our player must avoid
 const Enemy = function(x, y, v) {
     // Variables applied to each of our instances go here,
@@ -20,9 +27,15 @@ Enemy.prototype.update = function(dt) {
     this.x += this.velocity * dt;
     if (this.x > 707) {
         this.x = -100;
-        let RandVelocity = 60 * (Math.floor(Math.random() * 4 + 2));
+        let RandVelocity = (Math.random() + 0.3) * 60 * (Math.floor(Math.random() * 4 + 2));
         this.velocity = RandVelocity;
+      
     }
+
+    let bugXL = this.x - 60;
+    let bugXR = this.x + 60;
+    let bugT = this.y - 55;
+    let bugB = this.y + 55;
 
 };
 
@@ -37,14 +50,14 @@ Enemy.prototype.render = function() {
 
 const Player = function() {
     this.sprite = 'images/char-boy.png';
-    this.x = 300;
+    this.x = 200;
     this.y = 400;
     this.LR_move = 100
     this.UD_move = 80;
 };
 
 Player.prototype.resetPosition = function() {
-    this.x = 300;
+    this.x = 200;
     this.y = 400;
 };
 
@@ -61,12 +74,20 @@ Player.prototype.handleInput = function(direction) {
             this.x >= this.LR_move ? this.x -= this.LR_move : this.x -= 0;
             break;
         case 'right':
-            this.x <= (this.LR_move * 5) ? this.x += this.LR_move : this.x -= 0;
+            this.x <= (this.LR_move * 3) ? this.x += this.LR_move : this.x -= 0;
             break;
         case 'up':
             this.y -= this.UD_move;
             if (this.y <= 50) {
                 this.resetPosition();
+                Score += 1
+                console.log(Score);
+                ScoreBoard.textContent = `${Score}`;
+                if (Score === 3) {
+                    setTimeout(function() {
+                        alert('You Won!')
+                    }, 50);
+                }
             }
             break;
         case 'down':
@@ -79,12 +100,10 @@ Player.prototype.handleInput = function(direction) {
 
 // Now instantiate your objects.
 
-let bug1 = new Enemy(-80, 60, 60 * (Math.floor(Math.random() * 4 + 2)));
+let bug1 = new Enemy(-80, 60, 60 * ((Math.random() * 4 + 2)));
 let bug2 = new Enemy(-80, 140, 60 * (Math.floor(Math.random() * 4 + 2)));
-let bug3 = new Enemy(-80, 220, 60 * (Math.floor(Math.random() * 4 + 2)));
-console.log(bug1);
-console.log(bug2);
-console.log(bug3);
+let bug3 = new Enemy(-80, 220, 60 * ((Math.random() * 4 + 2)));
+
 
 
 // Place all enemy objects in an array called allEnemies
@@ -93,10 +112,6 @@ window.allEnemies = [bug1, bug2, bug3];
 // Place the player object in a variable called player
 
 window.player = new Player();
-
-
-
-
 
 
 // This listens for key presses and sends the keys to your

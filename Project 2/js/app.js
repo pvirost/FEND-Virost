@@ -106,7 +106,7 @@ let star1 = document.querySelector('.one')
 
 let starCount = 3;
 
-document.addEventListener('click', function(t){
+document.addEventListener('click', function(){
     timer = setInterval(function(){
         time++;
     }, 1000)
