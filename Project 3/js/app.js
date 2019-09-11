@@ -1,5 +1,9 @@
+//Scoreboard and life Counter
+
 let Score = 0;
-let ScoreBoard = document.querySelector('.score')
+let ScoreBoard = document.querySelector('.score');
+let Lives = 3;
+let lifeCounter = document.querySelector('.lives');
 // let gameBoard = document.getElementById('myCanvas')
 
 // Enemies our player must avoid
@@ -22,6 +26,8 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.velocity * dt;
+    
+    // If bug is off screen, re-render it with a new random veocity
     if (this.x > 507) {
         this.x = -100;
         let RandVelocity = (Math.random() + 0.3) * 60 * (Math.floor(Math.random() * 4 + 2));
@@ -29,10 +35,14 @@ Enemy.prototype.update = function(dt) {
       
     }
 
+    //Create an artificial "hitbox" for the bugs to detect collisions.
+
     let bugL = this.x - 60;
     let bugR = this.x + 60;
     let bugT = this.y - 55;
     let bugB = this.y + 55;
+
+    //If player position lands within hit box, then trigger the death function.
     if (player.x <= bugR && player.x >= bugL && player.y <= bugB && player.y >= bugT) {
         player.die();
     }
@@ -54,6 +64,8 @@ const Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 200;
     this.y = 400;
+
+    //The amount of movement from each key press
     this.LR_move = 100
     this.UD_move = 80;
 };
@@ -72,28 +84,50 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
+// Here's how the game handles a player/enemy collision
 Player.prototype.die = function() {
     
+    // Shake the board as feedback to the player that there was a collision.
     let gameBoard = document.getElementById('myCanvas')
     gameBoard.classList.add("apply-shake");
     this.resetPosition();
     setTimeout(function(){
         gameBoard.classList.remove("apply-shake");
     }, 820)
-   
+    
+    // Reduce the number of lives by 1 per collision
+    Lives -= 1
+    lifeCounter.textContent = `${Lives}`;
 
-    
-    
-
-    console.log('wiggle');
-    // this.x -= 60
-    // this.x += 30
-    
+    // End the game with a nice modal in the event of running out of lives
+    if (Lives == 0) {
+        setTimeout(function() {
+            Swal.fire({
+                title: "You've Lost :-(",
+                text: `You Ran Out of Lives. You Managed to Score ${Score} Times.`,
+                type: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Click to play again'
+            }).then((result) => {
+              if (result.value) {
+                  document.location.reload(true)
+              }
+            })
+        }, 150);
+    }    
 }
+
+
+//Handle keyboard inputs and move them
 
 Player.prototype.handleInput = function(direction) {
     switch (direction) {
         case 'left':
+
+        //Check if there's room to move. If not, don't make changes to player position.
             if (this.x >= this.LR_move) {
                 this.x -= this.LR_move
             } else {
@@ -107,11 +141,15 @@ Player.prototype.handleInput = function(direction) {
             break;
         case 'up':
             this.y -= this.UD_move;
+            //Register if player reaches the water
+            
             if (this.y <= 50) {
                 this.resetPosition();
+                // Raise score accordingly
                 Score += 1
-                console.log(Score);
                 ScoreBoard.textContent = `${Score}`;
+                
+                //If player scores 3 points, win the game
                 if (Score === 3) {
                     setTimeout(function() {
                         Swal.fire({
@@ -158,6 +196,8 @@ window.player = new Player();
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
+    
+    //Disable keystrokes if they've already won
     if (Score < 3) {
         var allowedKeys = {
             37: 'left',
@@ -168,8 +208,3 @@ document.addEventListener('keyup', function(e) {
         player.handleInput(allowedKeys[e.keyCode]);
     }
 });
-    
-        
-    
-
-    // player.handleInput(allowedKeys[e.keyCode]);
