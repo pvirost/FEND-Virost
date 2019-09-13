@@ -1,0 +1,7 @@
+.counter {
+    display: flex;
+}
+
+.number {
+    padding-left: 1em;
+}
