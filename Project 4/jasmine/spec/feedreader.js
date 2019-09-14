@@ -80,7 +80,7 @@ $(function () {
         });
 
         it('Feed container has content', function () {
-            expect(document.querySelectorAll('article.entry').length).toBeGreaterThan(0);
+            expect($('.feed .entry').length).toBeGreaterThan(0);
         });
     });
 
