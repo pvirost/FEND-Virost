@@ -57,6 +57,7 @@ nav {
 }
 nav h1 {
   margin: auto;
+  
 }
 nav h1 a {
   color: #fff;
@@ -64,6 +65,7 @@ nav h1 a {
   font-weight: 200;
   letter-spacing: 10px;
   text-transform: uppercase;
+  margin-top: 10px;
 }
 #breadcrumb {
     padding: 10px 40px 16px;
